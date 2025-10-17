@@ -1,0 +1,12 @@
+{
+  "name": "car-auto-apply",
+  "version": "1.0.0",
+  "description": "Automated form submission for parking portal",
+  "main": "automate-form.js",
+  "scripts": {
+    "start": "node automate-form.js"
+  },
+  "dependencies": {
+    "playwright": "^1.40.0"
+  }
+}

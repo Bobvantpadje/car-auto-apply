@@ -1,0 +1,40 @@
+name: Scheduled Task
+
+on:
+  schedule:
+    # Runs every 12 hours (at 08:00 and 20:00 UTC)
+    - cron: "0 8,20 * * *"
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  run-task:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Create screenshots directory
+        run: mkdir -p screenshots
+
+      - name: Run form automation
+        run: npm start
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: automation-screenshots-${{ github.run_number }}
+          path: screenshots/
+          retention-days: 30
