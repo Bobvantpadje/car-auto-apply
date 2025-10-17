@@ -3,7 +3,7 @@ name: Scheduled Task
 on:
   schedule:
     # Runs every 12 hours (at 08:00 and 20:00 UTC)
-    - cron: "0 8,20 * * *"
+    - cron: "15 10,22 * * *"
   workflow_dispatch: # Allows manual trigger from GitHub UI
 
 jobs:
